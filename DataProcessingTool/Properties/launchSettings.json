@@ -1,0 +1,8 @@
+{
+    "profiles": {
+        "DataProcessingTool": {
+            "commandName": "Project",
+            "commandLineArgs": "-d=/Volumes/CORP -d=/Volumes/CORP-1 -d=/Volumes/GME"
+        }
+    }
+}
