@@ -51,7 +51,7 @@ namespace DataProcessingTool
                 var filesToMerge = new[] { AclsRequireFurtherReview, ClassicRoleAssignments, ObjectIdMapping, CustomRoles, AkvUserMapping, HardResources };
                 foreach (var fileName in filesToMerge)
                 {
-                    var files = data.Where(x => x.Key.EndsWith(fileName, StringComparison.OrdinalIgnoreCase)).ToDictionary(x => x.Key, x => x.Value);
+                    var files = data.Where(x => x.Key.EndsWith(fileName, StringComparison.OrdinalIgnoreCase));
                     var merged = MergeFiles(files);
                     await File.WriteAllTextAsync(fileName, merged);
                 }
@@ -104,9 +104,10 @@ namespace DataProcessingTool
             return result;
         }
 
-        private static string MergeFiles(IDictionary<string, string> files)
+        // ReSharper disable PossibleMultipleEnumeration
+        private static string MergeFiles(IEnumerable<KeyValuePair<string, string>> files)
         {
-            if (files.Count == 0)
+            if (!files.Any())
             {
                 return null;
             }
