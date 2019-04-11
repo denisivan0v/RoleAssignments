@@ -4,7 +4,9 @@ namespace DataProcessingTool.Models
 {
     public class RoleAssignment : IEquatable<RoleAssignment>
     {
-        public SubscriptionInfo Subscription { get; set; }
+        public string SubscriptionId { get; set; }
+
+        public string AccessOf { get; set; }
         public string SourceObjectId { get; set; }
         public string SourceObjectName { get; set; }
         public string SourceObjectType { get; set; }
@@ -21,7 +23,7 @@ namespace DataProcessingTool.Models
 
         public override int GetHashCode()
             => HashCode.Combine(
-                Subscription.Id,
+                SubscriptionId,
                 SourceObjectId,
                 SourceObjectType,
                 TargetObjectId,
@@ -29,17 +31,16 @@ namespace DataProcessingTool.Models
 
         public bool Equals(RoleAssignment other)
         {
-            return Subscription.Id == other.Subscription.Id &&
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return SubscriptionId == other.SubscriptionId &&
                    SourceObjectId == other.SourceObjectId &&
                    SourceObjectType == other.SourceObjectType &&
                    TargetObjectId == other.TargetObjectId &&
                    RoleDefinitionId == other.RoleDefinitionId;
-        }
-
-        public class SubscriptionInfo
-        {
-            public string Id { get; set; }
-            public string AccessOf { get; set; }
         }
     }
 }

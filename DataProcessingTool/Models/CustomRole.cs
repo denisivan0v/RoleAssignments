@@ -4,6 +4,7 @@ namespace DataProcessingTool.Models
 {
     public class CustomRole : IEquatable<CustomRole>
     {
+        public string SubscriptionId { get; set; }
         public string Name { get; set; }
         public string Id { get; set; }
         public string IsCustom { get; set; }
@@ -17,7 +18,7 @@ namespace DataProcessingTool.Models
 
         public override bool Equals(object obj) => obj is CustomRole other && Equals(other);
 
-        public override int GetHashCode() => HashCode.Combine(Name, Id, IsCustom);
+        public override int GetHashCode() => HashCode.Combine(SubscriptionId, Name, Id, IsCustom);
 
         public bool Equals(CustomRole other)
         {
@@ -26,7 +27,8 @@ namespace DataProcessingTool.Models
                 return true;
             }
 
-            return Name == other.Name &&
+            return SubscriptionId == other.SubscriptionId &&
+                   Name == other.Name &&
                    Id == other.Id &&
                    IsCustom == other.IsCustom;
         }
